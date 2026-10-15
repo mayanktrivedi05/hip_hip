@@ -152,7 +152,7 @@
                 </a>
             </div>
 
-            @if(empty($recentTransactions))
+            @if($recentTransactions->isEmpty())
                 <div class="rounded-xl border border-dashed border-slate-800 py-12 text-center">
                     <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-slate-800/80 text-slate-500 mb-3">
                         <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -163,6 +163,43 @@
                     <p class="text-xs text-slate-400 mt-1 max-w-sm mx-auto">
                         Make your initial deposit to activate investment schemas and start tracking your earnings here.
                     </p>
+                </div>
+            @else
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm text-slate-300">
+                        <thead class="border-b border-slate-800 text-[11px] uppercase tracking-wider text-slate-500">
+                            <tr>
+                                <th class="pb-3">Reference</th>
+                                <th class="pb-3">Type</th>
+                                <th class="pb-3">Wallet</th>
+                                <th class="pb-3">Amount</th>
+                                <th class="pb-3">Post Balance</th>
+                                <th class="pb-3 text-right">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800/60 text-xs">
+                            @foreach($recentTransactions as $txn)
+                                <tr>
+                                    <td class="py-3 font-mono font-semibold text-white">{{ $txn->tx_hash }}</td>
+                                    <td class="py-3">
+                                        <span class="inline-flex rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider
+                                            @if($txn->type === 'deposit') bg-emerald-500/20 text-emerald-300
+                                            @elseif($txn->type === 'roi_payout') bg-cyan-500/20 text-cyan-300
+                                            @elseif($txn->type === 'withdrawal') bg-rose-500/20 text-rose-300
+                                            @else bg-indigo-500/20 text-indigo-300 @endif">
+                                            {{ str_replace('_', ' ', $txn->type) }}
+                                        </span>
+                                    </td>
+                                    <td class="py-3 text-slate-400 capitalize">{{ $txn->wallet?->type ?? 'N/A' }}</td>
+                                    <td class="py-3 font-bold {{ in_array($txn->type, ['deposit', 'roi_payout', 'referral_bonus']) ? 'text-emerald-400' : 'text-rose-400' }}">
+                                        {{ in_array($txn->type, ['deposit', 'roi_payout', 'referral_bonus']) ? '+' : '-' }}${{ number_format((float) $txn->amount, 2) }}
+                                    </td>
+                                    <td class="py-3 text-slate-400">${{ number_format((float) $txn->post_balance, 2) }}</td>
+                                    <td class="py-3 text-right text-slate-400">{{ $txn->created_at->format('M d, H:i') }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             @endif
         </div>

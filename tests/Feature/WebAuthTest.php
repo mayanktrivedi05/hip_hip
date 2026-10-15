@@ -37,7 +37,7 @@ test('investor can login with valid credentials', function () {
         'email' => 'alice@test.com',
         'password' => 'secret123',
         'role' => 'user',
-        
+
     ]);
 
     $response = $this->post(route('login'), [
@@ -58,7 +58,7 @@ test('admin is redirected to admin dashboard upon login', function () {
 
     $response = $this->post(route('login'), [
         'email' => 'admin@test.com',
-       
+
         'password' => 'adminpass123',
     ]);
 
@@ -68,12 +68,12 @@ test('admin is redirected to admin dashboard upon login', function () {
 
 test('standard user cannot access admin dashboard', function () {
     $user = User::factory()->create([
-        
+
         'role' => 'user',
     ]);
 
     $response = $this->actingAs($user)->get(route('admin.dashboard'));
-    
+
     $response->assertStatus(403);
 });
 
@@ -92,7 +92,6 @@ test('authenticated user can logout', function () {
     $user = User::factory()->create();
 
     $response = $this->actingAs($user)->post(route('logout'));
-  
 
     $response->assertRedirect(route('login'));
     $this->assertGuest();
