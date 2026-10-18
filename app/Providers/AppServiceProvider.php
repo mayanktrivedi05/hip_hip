@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +20,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        $activeTheme = config('view.theme', env('APP_THEME', 'default'));
+
+        $themePath = resource_path("views/{$activeTheme}");
+        if (is_dir($themePath)) {
+            View::prependLocation($themePath);
+        }
+
+        View::share('activeTheme', $activeTheme);
     }
 }
