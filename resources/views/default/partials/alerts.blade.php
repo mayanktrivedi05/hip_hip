@@ -1,14 +1,14 @@
 @if (session('success'))
-    <div x-data="{ show: true }" x-show="show" x-transition.duration.300ms class="mb-6 flex items-center justify-between rounded-xl border border-emerald-500/20 bg-emerald-500/10 p-4 text-emerald-400 backdrop-blur-md">
+    <div x-data="{ show: true }" x-show="show" x-transition.duration.300ms class="mb-6 flex items-center justify-between rounded-xl border border-lime-500/20 bg-lime-500/10 p-4 text-lime-400 backdrop-blur-md">
         <div class="flex items-center space-x-3">
-            <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-500/20 text-emerald-300">
+            <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-lime-500/20 text-lime-300">
                 <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                 </svg>
             </div>
             <p class="text-sm font-medium">{{ session('success') }}</p>
         </div>
-        <button @click="show = false" type="button" class="text-emerald-400/60 hover:text-emerald-300 transition-colors">
+        <button @click="show = false" type="button" class="text-lime-400/60 hover:text-lime-300 transition-colors">
             <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
@@ -46,16 +46,16 @@
 @endif
 
 @if (session('info'))
-    <div x-data="{ show: true }" x-show="show" x-transition.duration.300ms class="mb-6 flex items-center justify-between rounded-xl border border-sky-500/20 bg-sky-500/10 p-4 text-sky-400 backdrop-blur-md">
+    <div x-data="{ show: true }" x-show="show" x-transition.duration.300ms class="mb-6 flex items-center justify-between rounded-xl border border-zinc-700/40 bg-zinc-800/60 p-4 text-zinc-300 backdrop-blur-md">
         <div class="flex items-center space-x-3">
-            <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-sky-500/20 text-sky-300">
+            <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-zinc-700/50 text-zinc-200">
                 <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
             </div>
             <p class="text-sm font-medium">{{ session('info') }}</p>
         </div>
-        <button @click="show = false" type="button" class="text-sky-400/60 hover:text-sky-300 transition-colors">
+        <button @click="show = false" type="button" class="text-zinc-400 hover:text-zinc-200 transition-colors">
             <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
