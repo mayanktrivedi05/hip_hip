@@ -147,7 +147,7 @@
                     <h3 class="text-base font-bold text-white">Recent Ledger Transactions</h3>
                     <p class="text-xs text-zinc-400 mt-0.5">All deposits, ROI credits, and withdrawal activities</p>
                 </div>
-                <a href="#transactions" class="text-xs font-semibold text-lime-400 hover:text-lime-300 transition-colors">
+                <a href="{{ route('user.transactions') }}" class="text-xs font-semibold text-lime-400 hover:text-lime-300 transition-colors">
                     View Complete History &rarr;
                 </a>
             </div>

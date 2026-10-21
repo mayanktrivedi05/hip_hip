@@ -1,11 +1,14 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\AdminTransactionController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\User\DashboardController;
+use App\Http\Controllers\User\TransactionController;
+use App\Http\Controllers\User\WalletController;
 use App\Models\User;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Http\Request;
@@ -68,9 +71,13 @@ Route::middleware('auth')->group(function () {
 
     // Investor / User Area
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('user.dashboard');
+    Route::get('/wallets', [WalletController::class, 'index'])->name('user.wallets');
+    Route::post('/wallets/transfer', [WalletController::class, 'transfer'])->name('user.wallets.transfer');
+    Route::get('/transactions', [TransactionController::class, 'index'])->name('user.transactions');
 
     // Admin Control Center (Protected by 'role:admin')
     Route::middleware('role:admin')->prefix('admin')->group(function () {
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+        Route::get('/transactions', [AdminTransactionController::class, 'index'])->name('admin.transactions');
     });
 });
